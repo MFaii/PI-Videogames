@@ -1,4 +1,3 @@
-const { Genre } = require("../../db");
 const { getGenres } = require("../../services/genres.service");
 
 const ShowGenres = async (req, res, next) => {
