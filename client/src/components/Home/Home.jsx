@@ -1,7 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterByGenre, getGenres, getVideogames } from "../../redux/actions";
+import {
+  filterByGenre,
+  getGenres,
+  getPlatforms,
+  getVideogames,
+  filterByPlatform,
+} from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
@@ -11,6 +17,7 @@ const Home = () => {
 
   const allVideogames = useSelector((state) => state.videogames);
   const genres = useSelector((state) => state.genres);
+  const platforms = useSelector((state) => state.platforms);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [videogamesPerPage, setVideogamesPerPage] = useState(12);
@@ -20,7 +27,6 @@ const Home = () => {
     indexOfFirstVideogame,
     indexOfLastVideogame
   );
-  const [loading, setLoading] = useState(false);
 
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -28,31 +34,55 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getVideogames());
+    dispatch(getGenres());
+    dispatch(getPlatforms());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getGenres());
-  }, [dispatch]);
+  const handleReload = (e) => {
+    e.preventDefault();
+    window.location.reload(true);
+  };
 
   const handleFilterGenres = (e) => {
     dispatch(filterByGenre(e.target.value));
     setCurrentPage(1);
   };
 
+  const handleFilterPlatforms = (e) => {
+    dispatch(filterByPlatform(e.target.value));
+    setCurrentPage(1);
+  };
+
   return (
     <>
       <div>
-        <select>
-          <option value="All">All</option>
-          <option value="Asc">Upward</option>
-          <option value="Desc">Falling</option>
-        </select>
-        <select onChange={(e) => handleFilterGenres(e)}>
-          <option value="All">All</option>
-          {genres.map((genre) => (
-            <option value={genre.name}>{genre.name}</option>
-          ))}
-        </select>
+        <button onClick={(e) => handleReload(e)}>Reload</button>
+        <div>
+          <p>Alphabetical order</p>
+          <select>
+            <option value="All">All</option>
+            <option value="Asc">Upward</option>
+            <option value="Desc">Falling</option>
+          </select>
+        </div>
+        <div>
+          <p>Filter by Genre</p>
+          <select onChange={(e) => handleFilterGenres(e)}>
+            <option value="All">All</option>
+            {genres.map((genre) => (
+              <option value={genre.name}>{genre.name}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <p>Filter by Platforms</p>
+          <select onChange={(e) => handleFilterPlatforms(e)}>
+            <option value="All">All</option>
+            {platforms.map((platform) => (
+              <option value={platform.name}>{platform.name}</option>
+            ))}
+          </select>
+        </div>
       </div>
       <Pagination
         videogamesPerPage={videogamesPerPage}

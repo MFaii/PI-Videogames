@@ -17,6 +17,14 @@ const Card = ({ name, background_image, genres, id, released, platforms }) => {
             return <p>{genre.charAt(0).toUpperCase() + genre.slice(1)}</p>;
           })}
         </h5>
+        <h5>
+          Platforms:
+          {platforms.map((platform) => {
+            return (
+              <p>{platform.charAt(0).toUpperCase() + platform.slice(1)}</p>
+            );
+          })}
+        </h5>
       </div>
     </>
   );

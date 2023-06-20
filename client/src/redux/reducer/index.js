@@ -1,10 +1,17 @@
-import { FILTER_BY_GENRE, GET_GENRES, GET_VIDEOGAMES } from "../actionTypes";
+import {
+  FILTER_BY_GENRE,
+  FILTER_BY_PLATFORM,
+  GET_GENRES,
+  GET_PLATFORMS,
+  GET_VIDEOGAMES,
+} from "../actionTypes";
 
 const initialState = {
   videogames: [],
   allVideogames: [],
   videogameDetail: [],
   genres: [],
+  platforms: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -29,7 +36,23 @@ const rootReducer = (state = initialState, action) => {
               if (game.genres.includes(action.payload)) return game;
             });
       return { ...state, videogames: genreFiltered };
-
+    case GET_PLATFORMS:
+      return {
+        ...state,
+        platforms: action.payload,
+      };
+    case FILTER_BY_PLATFORM:
+      const allVideogames2 = state.allVideogames;
+      const platformFiltered =
+        action.payload === "All"
+          ? allVideogames2
+          : allVideogames2.filter((game) => {
+              if (game.platforms.includes(action.payload)) return game;
+            });
+      return {
+        ...state,
+        videogames: platformFiltered,
+      };
     default:
       return state;
   }
