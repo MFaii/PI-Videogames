@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
+import Searchbar from "../Searchbar/Searchbar";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -84,6 +85,7 @@ const Home = () => {
           </select>
         </div>
       </div>
+      <Searchbar />
       <Pagination
         videogamesPerPage={videogamesPerPage}
         allVideogames={allVideogames.length}
@@ -93,7 +95,7 @@ const Home = () => {
         {currentVideogames?.map((el) => {
           return (
             <>
-              <Link to={"/home/" + el.id}>
+              <Link to={"/videogame/" + el.id}>
                 <Card
                   name={el.name}
                   background_image={el.background_image}

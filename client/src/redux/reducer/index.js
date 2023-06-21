@@ -4,6 +4,8 @@ import {
   GET_GENRES,
   GET_PLATFORMS,
   GET_VIDEOGAMES,
+  GET_DETAIL,
+  GET_NAMES,
 } from "../actionTypes";
 
 const initialState = {
@@ -52,6 +54,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         videogames: platformFiltered,
+      };
+    case GET_DETAIL:
+      return {
+        ...state,
+        videogameDetail: action.payload,
+      };
+    case GET_NAMES:
+      return {
+        ...state,
+        videogames: action.payload,
       };
     default:
       return state;

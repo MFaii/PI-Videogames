@@ -2,7 +2,9 @@ import axios from "axios";
 import {
   FILTER_BY_GENRE,
   FILTER_BY_PLATFORM,
+  GET_DETAIL,
   GET_GENRES,
+  GET_NAMES,
   GET_PLATFORMS,
   GET_VIDEOGAMES,
 } from "../actionTypes";
@@ -45,5 +47,29 @@ export const filterByPlatform = (payload) => {
   return {
     type: FILTER_BY_PLATFORM,
     payload,
+  };
+};
+
+export const getVideogameDetail = (id) => {
+  return async function (dispatch) {
+    var videogameDetail = await axios.get(
+      `http://localhost:3001/videogames/${id}`
+    );
+    return dispatch({
+      type: GET_DETAIL,
+      payload: videogameDetail.data,
+    });
+  };
+};
+
+export const getVideogameName = (name) => {
+  return async function (dispatch) {
+    var videogameDetail = await axios.get(
+      `http://localhost:3001/videogames?name=${name}`
+    );
+    return dispatch({
+      type: GET_NAMES,
+      payload: videogameDetail.data,
+    });
   };
 };
