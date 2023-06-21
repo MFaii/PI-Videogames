@@ -45,7 +45,7 @@ const getOneGame = async (id) => {
     background_image: videogameData.background_image,
     rating: videogameData.rating,
     platform: videogameData.platforms.map((platform) => platform.platform.name),
-    description: videogameData.description,
+    description: videogameData.description_raw,
     genres: videogameData.genres.map((genre) => genre.name),
   };
 };

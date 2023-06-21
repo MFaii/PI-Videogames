@@ -7,6 +7,7 @@ import {
   getPlatforms,
   getVideogames,
   filterByPlatform,
+  orderByName,
 } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
@@ -28,6 +29,8 @@ const Home = () => {
     indexOfFirstVideogame,
     indexOfLastVideogame
   );
+
+  const [order, setOrder] = useState("");
 
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -54,14 +57,23 @@ const Home = () => {
     setCurrentPage(1);
   };
 
+  const handleSort = (e) => {
+    e.preventDefault();
+    dispatch(orderByName(e.target.value));
+    setCurrentPage(1);
+    setOrder(`Order ${e.target.value}`);
+  };
+
   return (
     <>
       <div>
         <button onClick={(e) => handleReload(e)}>Reload</button>
         <div>
           <p>Alphabetical order</p>
-          <select>
-            <option value="All">All</option>
+          <select onChange={(e) => handleSort(e)}>
+            <option disabled selected>
+              Order
+            </option>
             <option value="Asc">Upward</option>
             <option value="Desc">Falling</option>
           </select>

@@ -7,6 +7,7 @@ import {
   GET_NAMES,
   GET_PLATFORMS,
   GET_VIDEOGAMES,
+  ORDER_BY_NAME,
 } from "../actionTypes";
 
 export const getVideogames = () => {
@@ -71,5 +72,12 @@ export const getVideogameName = (name) => {
       type: GET_NAMES,
       payload: videogameDetail.data,
     });
+  };
+};
+
+export const orderByName = (payload) => {
+  return {
+    type: ORDER_BY_NAME,
+    payload,
   };
 };

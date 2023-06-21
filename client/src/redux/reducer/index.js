@@ -6,6 +6,7 @@ import {
   GET_VIDEOGAMES,
   GET_DETAIL,
   GET_NAMES,
+  ORDER_BY_NAME,
 } from "../actionTypes";
 
 const initialState = {
@@ -65,6 +66,26 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         videogames: action.payload,
       };
+    case ORDER_BY_NAME:
+      let sortedVideogames =
+        action.payload === "Asc"
+          ? state.allVideogames.sort(function (a, b) {
+              if (a.name > b.name) return 1;
+
+              if (b.name > a.name) {
+                return -1;
+              }
+            })
+          : state.allVideogames.sort(function (a, b) {
+              if (a.name > b.name) {
+                return -1;
+              }
+              if (a.name < b.name) {
+                return 1;
+              }
+              return 0;
+            });
+      return { ...state, videogames: sortedVideogames };
     default:
       return state;
   }
