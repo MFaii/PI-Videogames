@@ -98,11 +98,6 @@ const Home = () => {
         </div>
       </div>
       <Searchbar />
-      <Pagination
-        videogamesPerPage={videogamesPerPage}
-        allVideogames={allVideogames.length}
-        pagination={pagination}
-      />
       <div>
         {currentVideogames?.map((el) => {
           return (
@@ -121,6 +116,11 @@ const Home = () => {
           );
         })}
       </div>
+      <Pagination
+        videogamesPerPage={videogamesPerPage}
+        allVideogames={allVideogames.length}
+        pagination={pagination}
+      />
     </>
   );
 };

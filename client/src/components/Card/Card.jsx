@@ -1,9 +1,10 @@
 import React from "react";
+import "./Card.css";
 
 const Card = ({ name, background_image, genres, id, released, platforms }) => {
   return (
     <>
-      <div>
+      <div className="card">
         <h2>{name.charAt(0).toUpperCase() + name.slice(1)}</h2>
         <img
           src={background_image}
@@ -12,18 +13,8 @@ const Card = ({ name, background_image, genres, id, released, platforms }) => {
           height="250vh"
         />
         <h5>
-          Genres:
-          {genres.map((genre) => {
-            return <p>{genre.charAt(0).toUpperCase() + genre.slice(1)}</p>;
-          })}
-        </h5>
-        <h5>
-          Platforms:
-          {platforms.map((platform) => {
-            return (
-              <p>{platform.charAt(0).toUpperCase() + platform.slice(1)}</p>
-            );
-          })}
+          <p>Genres: {genres?.join(", ")}</p>
+          <p>Platforms: {platforms?.join(", ")}</p>
         </h5>
       </div>
     </>
