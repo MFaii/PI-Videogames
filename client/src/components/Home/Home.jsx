@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import Searchbar from "../Searchbar/Searchbar";
+import "./Home.css";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Home = () => {
   const platforms = useSelector((state) => state.platforms);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [videogamesPerPage, setVideogamesPerPage] = useState(12);
+  const [videogamesPerPage, setVideogamesPerPage] = useState(10);
   const indexOfLastVideogame = currentPage * videogamesPerPage;
   const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage;
   const currentVideogames = allVideogames.slice(
@@ -98,11 +99,15 @@ const Home = () => {
         </div>
       </div>
       <Searchbar />
-      <div>
+      <h1>Videogames</h1>
+      <div className="cards">
         {currentVideogames?.map((el) => {
           return (
-            <>
-              <Link to={"/videogame/" + el.id}>
+            <div key={el.id}>
+              <Link
+                to={"/videogame/" + el.id}
+                style={{ textDecoration: "none", color: "black" }}
+              >
                 <Card
                   name={el.name}
                   background_image={el.background_image}
@@ -112,7 +117,7 @@ const Home = () => {
                   platforms={el.platforms}
                 />
               </Link>
-            </>
+            </div>
           );
         })}
       </div>
