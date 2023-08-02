@@ -14,6 +14,7 @@ import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import Searchbar from "../Searchbar/Searchbar";
 import "./Home.css";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -126,6 +127,7 @@ const Home = () => {
         allVideogames={allVideogames.length}
         pagination={pagination}
       />
+      <Footer />
     </>
   );
 };
