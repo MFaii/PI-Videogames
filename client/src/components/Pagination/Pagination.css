@@ -15,13 +15,21 @@
 .pagination ul li a {
   display: block;
   padding: 5px 10px;
-  border: 1px solid #ddd;
+  border: 1px solid black;
   text-decoration: none;
   color: #000;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: #f1f1f1;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  font-weight: bold;
+  font-size: 16px;
+  width: 40px;
 }
 
 .pagination ul li a:hover {
-  background: #ddd;
+  background: #555454;
   color: #000;
   cursor: pointer;
 }

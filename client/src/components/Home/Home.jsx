@@ -15,6 +15,7 @@ import Pagination from "../Pagination/Pagination";
 import Searchbar from "../Searchbar/Searchbar";
 import "./Home.css";
 import Footer from "../Footer/Footer";
+import Loader from "../Loader/Loader";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -33,15 +34,23 @@ const Home = () => {
   );
 
   const [order, setOrder] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
   useEffect(() => {
-    dispatch(getVideogames());
-    dispatch(getGenres());
-    dispatch(getPlatforms());
+    const promise = new Promise((resolve) => {
+      resolve("resuelto");
+    });
+    promise
+      .then(() => {
+        dispatch(getVideogames());
+        dispatch(getGenres());
+        dispatch(getPlatforms());
+      })
+      .then(() => setTimeout(() => setLoading(false), 3000));
   }, [dispatch]);
 
   const handleReload = (e) => {
@@ -68,8 +77,12 @@ const Home = () => {
 
   return (
     <>
-      <div>
-        <button onClick={(e) => handleReload(e)}>Reload</button>
+      <div className="title">
+        <h1>Videogames</h1>
+        <p>Find a videogame</p>
+        <Searchbar />
+      </div>
+      <div className="header">
         <div>
           <p>Alphabetical order</p>
           <select onChange={(e) => handleSort(e)}>
@@ -97,31 +110,36 @@ const Home = () => {
               <option value={platform.name}>{platform.name}</option>
             ))}
           </select>
+          <button onClick={(e) => handleReload(e)}>Reset</button>
         </div>
       </div>
-      <Searchbar />
-      <h1>Videogames</h1>
-      <div className="cards">
-        {currentVideogames?.map((el) => {
-          return (
-            <div key={el.id}>
-              <Link
-                to={"/videogame/" + el.id}
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <Card
-                  name={el.name}
-                  background_image={el.background_image}
-                  genres={el.genres}
-                  key={el.id}
-                  released={el.released}
-                  platforms={el.platforms}
-                />
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+      {loading ? (
+        <div className="loader_container">
+          <Loader />
+        </div>
+      ) : (
+        <div className="cards">
+          {currentVideogames?.map((el) => {
+            return (
+              <div key={el.id}>
+                <Link
+                  to={"/videogame/" + el.id}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <Card
+                    name={el.name}
+                    background_image={el.background_image}
+                    genres={el.genres}
+                    key={el.id}
+                    released={el.released}
+                    platforms={el.platforms}
+                  />
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      )}
       <Pagination
         videogamesPerPage={videogamesPerPage}
         allVideogames={allVideogames.length}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getVideogameName } from "../../redux/actions";
+import "./Searchbar.css";
 
 const Searchbar = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Searchbar = () => {
 
   return (
     <>
-      <div>
+      <div className="searchbar">
         <input
           type="text"
           placeholder="Search..."

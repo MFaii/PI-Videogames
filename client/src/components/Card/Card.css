@@ -15,11 +15,13 @@
 
 .card img {
   border-radius: 5px;
-  object-fit: contain;
+  object-fit: cover;
   height: 100%;
   width: 100%;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
+  margin: 5px;
+  overflow: hidden;
 }
 
 .card img:hover {
