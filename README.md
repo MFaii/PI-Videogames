@@ -9,7 +9,6 @@ Proyecto consumiendo la API de Videojuegos: https://rawg.io/apidocs
 - ReactJs
 - Redux
 - CSS3
-- Bootstrap ?? 
 
 #### Back-end
 
