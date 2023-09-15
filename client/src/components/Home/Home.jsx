@@ -86,9 +86,7 @@ const Home = () => {
         <div>
           <p>Alphabetical order</p>
           <select onChange={(e) => handleSort(e)}>
-            <option disabled selected>
-              Order
-            </option>
+            <option style={{ display: "none" }}>Order</option>
             <option value="Asc">Upward</option>
             <option value="Desc">Falling</option>
           </select>
@@ -98,7 +96,9 @@ const Home = () => {
           <select onChange={(e) => handleFilterGenres(e)}>
             <option value="All">All</option>
             {genres.map((genre) => (
-              <option value={genre.name}>{genre.name}</option>
+              <option key={genre.name} value={genre.name}>
+                {genre.name}
+              </option>
             ))}
           </select>
         </div>
@@ -107,7 +107,9 @@ const Home = () => {
           <select onChange={(e) => handleFilterPlatforms(e)}>
             <option value="All">All</option>
             {platforms.map((platform) => (
-              <option value={platform.name}>{platform.name}</option>
+              <option value={platform.name} key={platform.name}>
+                {platform.name}
+              </option>
             ))}
           </select>
           <button onClick={(e) => handleReload(e)}>Reset</button>
@@ -130,7 +132,6 @@ const Home = () => {
                     name={el.name}
                     background_image={el.background_image}
                     genres={el.genres}
-                    key={el.id}
                     released={el.released}
                     platforms={el.platforms}
                   />
